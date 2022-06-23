@@ -2,9 +2,15 @@ const Product = require("../models/productSchema");
 const productGet = async (req, res) => {
     try {
         const productList = await Product.find();
-        res.status(200).json(productList);
+        res.json({
+            status: "ok",
+            data: productList,
+        });
     } catch (err) {
-        res.status(500).send(err);
+        res.json({
+            status: "ok",
+            message: err.message,
+        });
     }
 };
 

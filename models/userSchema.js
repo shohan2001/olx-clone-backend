@@ -3,7 +3,14 @@ const mongoose = require("mongoose");
 //hello !
 
 const userSchema = new mongoose.Schema({
-    userName: String,
+    outlookId: { type: String },
+    accesstoken: { type: String }, // outlook oAuth
+    email: { type: String, unique: true },
+    name: { type: String },
+    password: { type: String },
+    passwordResetToken: { type: String },
+    passwordResetExpires: { type: Date },
+    isAdmin: { type: Boolean, default: false },
 });
 
 module.exports = mongoose.model("User", userSchema);

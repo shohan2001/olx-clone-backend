@@ -11,6 +11,10 @@ const productSchema = new mongoose.Schema({
     },
     description: String,
     location: String,
+    sellerID: {
+        type: String,
+        required: true,
+    },
     images: Array,
     sold: Boolean,
 });
