@@ -20,13 +20,14 @@ router.get(
 router.get(
     "/auth/outlook/callback",
     passport.authenticate("windowslive", {
-        // successRedirect: "/success",
+        successRedirect: "/success",
         failureRedirect: "/failed",
     }),
+    // now we can access the user in the request with req.user (passport gives us this property)
     function (req, res) {
         //  Successful authentication
-        res.redirect(CLIENT_HOME_PAGE_URL + "profile");
-        res.redirect("/");
+        res().redirect(CLIENT_HOME_PAGE_URL);
+        // res.redirect("/");
     }
 );
 
@@ -37,19 +38,22 @@ router.get("/failed", (req, res) => {
     });
 });
 router.get("/success", (req, res) => {
-    res.status(200).json({
-        success: true,
-        msg: "user authentication successful",
+    // res.status(200).json({
+    //     success: true,
+    //     msg: "user authentication successful",
+    // });
+    res.cookie("token", "successful");
+    res.redirect(CLIENT_HOME_PAGE_URL);
+});
+
+router.get("/auth/logout", (req, res) => {
+    req.logout(function (err) {
+        if (err) {
+            return next(err);
+        }
+        res.redirect(CLIENT_HOME_PAGE_URL);
     });
 });
-
-router.get("/auth/logout", function (req, res) {
-    req.session = null;
-    req.logout();
-    res.redirect(CLIENT_HOME_PAGE_URL);
-    res.status(200).json({ msg: "Logged out successfully" });
-});
-
 // ////// USER INFO "PROTECTED" ROUTE
 
 router.get("/user", isLoggedIn, (req, res) => {
@@ -63,6 +67,21 @@ router.get("/user", isLoggedIn, (req, res) => {
         }
         return res.status(500).json({ msg: "someting wrong happened" });
     });
+});
+
+router.put("/user/update", isLoggedIn, async (req, res) => {
+    const id = req.user.id;
+    const updatedUser = req.body;
+    try {
+        const currUser = await User.findById(id);
+        currUser.name = updatedUser.name;
+        currUser.email = updatedUser.email;
+        currUser.phoneNumber = updatedUser.phoneNumber;
+        currUser.save();
+        res.status(200).json(currUser);
+    } catch (err) {
+        res.status(500).send(err);
+    }
 });
 
 module.exports = router;

@@ -11,6 +11,7 @@ const userSchema = new mongoose.Schema({
     passwordResetToken: { type: String },
     passwordResetExpires: { type: Date },
     isAdmin: { type: Boolean, default: false },
+    phoneNumber: { type: String, required: false },
 });
 
 module.exports = mongoose.model("User", userSchema);

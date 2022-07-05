@@ -116,6 +116,13 @@ const productUpdateById = async (req, res) => {
         if (updatedProduct.sellerID) {
             currProduct.sellerID = updatedProduct.sellerID;
         }
+        if (updatedProduct.sellerName) {
+            currProduct.sellerName = updatedProduct.sellerName;
+        }
+        if (updatedProduct.sellerPhoneNumber) {
+            currProduct.sellerPhoneNumber = updatedProduct.sellerPhoneNumber;
+        }
+
         await currProduct.save();
 
         res.status(200).send("successful");

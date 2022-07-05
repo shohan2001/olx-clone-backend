@@ -29,6 +29,14 @@ const productSchema = new mongoose.Schema({
     },
     images: Array,
     sold: Boolean,
+    sellerName: {
+        type: String,
+        required: true,
+    },
+    sellerPhoneNumber: {
+        type: String,
+        required: true,
+    },
 });
 
 module.exports = mongoose.model("product", productSchema);

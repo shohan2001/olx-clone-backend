@@ -6,10 +6,13 @@ const User = require("../models/userSchema");
 const OUTLOOK_CLIENT_ID = process.env.OUTLOOK_CLIENT_ID;
 const OUTLOOK_CLIENT_SECRET = process.env.OUTLOOK_CLIENT_SECRET;
 
+// this is the cookie part
+// this is called after the callback from outlook function
 passport.serializeUser(function (user, done) {
     done(null, user.id);
 });
 
+//this is when the browser sends the cookie to server (we de serialize the cookie) and return the user
 passport.deserializeUser(function (id, done) {
     User.findById(id, function (err, user) {
         done(err, user);
