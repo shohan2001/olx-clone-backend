@@ -30,6 +30,9 @@ const productPost = async (req, res) => {
         brand: productDetails.brand,
         sellerID: productDetails.sellerID,
         postedDate: productDetails.postedDate,
+        sellerName: productDetails.sellerName,
+        sellerPhoneNumber: productDetails.sellerPhoneNumber,
+
         sold: false,
     });
     try {

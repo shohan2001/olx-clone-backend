@@ -5,7 +5,7 @@ const mongoose = require("mongoose");
 const userSchema = new mongoose.Schema({
     outlookId: { type: String },
     accesstoken: { type: String }, // outlook oAuth
-    email: { type: String, unique: true },
+    email: { type: String },
     name: { type: String },
     password: { type: String },
     passwordResetToken: { type: String },
