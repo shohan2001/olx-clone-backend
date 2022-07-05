@@ -9,6 +9,18 @@ const productSchema = new mongoose.Schema({
         type: Number,
         required: true,
     },
+    brand: {
+        type: String,
+        required: false,
+    },
+    category: {
+        type: String,
+        required: true,
+    },
+    postedDate: {
+        type: Date,
+        required: true,
+    },
     description: String,
     location: String,
     sellerID: {

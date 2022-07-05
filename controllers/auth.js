@@ -19,8 +19,8 @@ passport.deserializeUser(function (id, done) {
 passport.use(
     new OutlookStrategy(
         {
-            clientID: OUTLOOK_CLIENT_ID,
-            clientSecret: OUTLOOK_CLIENT_SECRET,
+            clientID: "866c2334-d25c-424c-b744-3f4eff37977b",
+            clientSecret: "vEJ8Q~f7xbPfbmZ3ztdxtiRFYjyTVPalEXg-9c-x",
             callbackURL: "http://localhost:5000/auth/outlook/callback",
             passReqToCallback: true,
         },

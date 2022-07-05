@@ -1,8 +1,10 @@
 const express = require("express");
 const passport = require("passport");
 const router = express.Router();
+const passportSetup = require("../controllers/auth");
 const { authenticate, isLoggedIn } = require("../middleware/index");
 const User = require("../models/userSchema");
+const CLIENT_HOME_PAGE_URL = "http://localhost:3000/";
 router.get(
     "/auth/outlook",
     passport.authenticate("windowslive", {
@@ -22,8 +24,8 @@ router.get(
         failureRedirect: "/failed",
     }),
     function (req, res) {
-        // Successful authentication
-        // res.redirect(CLIENT_HOME_PAGE_URL + "profile");
+        //  Successful authentication
+        res.redirect(CLIENT_HOME_PAGE_URL + "profile");
         res.redirect("/");
     }
 );
@@ -44,8 +46,8 @@ router.get("/success", (req, res) => {
 router.get("/auth/logout", function (req, res) {
     req.session = null;
     req.logout();
-    // res.redirect(CLIENT_HOME_PAGE_URL);
-    // res.status(200).json({ msg: "Logged out successfully" });
+    res.redirect(CLIENT_HOME_PAGE_URL);
+    res.status(200).json({ msg: "Logged out successfully" });
 });
 
 // ////// USER INFO "PROTECTED" ROUTE
