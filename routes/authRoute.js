@@ -20,7 +20,7 @@ router.get(
 router.get(
     "/auth/outlook/callback",
     passport.authenticate("windowslive", {
-        successRedirect: "/success",
+        // successRedirect: "/success",
         failureRedirect: "/failed",
     }),
     function (req, res) {
